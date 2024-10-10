@@ -5,8 +5,9 @@ const App = () => {
   return (
     <div>
 
-    {/* <Nav></Nav>    */}
-    <Componet/>
+    <Nav></Nav>   
+    {/* <Componet/> */}
+    {/* <Countdown/> */}
     </div>
   )
 }
@@ -24,23 +25,20 @@ function Nav(){
       setData(json)
       setLoading(false)
     })
+    
   },[currentTab])
   return <div>
     <button onClick={function(){
       setCurrectTab(1)
-      console.log(data.title)
     }} style={{color:currentTab==1?'red':'black'}}>home</button>
     <button  onClick={function(){
       setCurrectTab(2)
-      console.log(data.title)
     }} style={{color:currentTab == 2?'red':'black'}}>notification</button>
     <button onClick={function(){
       setCurrectTab(3)
-      console.log(data.title)
     }} style={{color:currentTab ==3?'red':'black'}}>jobs</button>
     <button onClick={function(){
       setCurrectTab(4)
-      console.log(data.title)
     }} style={{color:currentTab ==4?'red':'black'}}>message</button>
 <p>{loading ?"loading...." : data.title}</p>
   </div>
@@ -57,6 +55,24 @@ function Componet(){
       increase()
     }}>increase count</button>
   </div>
+}
+
+function Countdown(){
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+      const interval = setInterval(() => {
+        // console.log("count second")
+          setSeconds(prev => prev + 1);
+      }, 1000);
+
+      return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+  useEffect(function(){
+    console.log("on every second changes it will run ")
+  },[seconds])
+
+  return <div>{seconds} seconds elapsed</div>;
 }
 
 export default App
